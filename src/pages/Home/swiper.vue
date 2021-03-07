@@ -35,7 +35,7 @@ export default {
 
 .swiper {
     .van-swipe__indicators{
-        left: 80%;
+        left: 85%;
         align-items: flex-end;
         .van-swipe__indicator{
             background: #fff;

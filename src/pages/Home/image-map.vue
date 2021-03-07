@@ -40,7 +40,9 @@ export default {
     height: 4.4rem;
     .part-one,.part-two{
         background: no-repeat;
-        background-size: contain;
+        // background-size: contain;
+        background-size: 105% 100%;
+        background-position-x: -.2rem;
         display: flex;
     }
     .part-one{

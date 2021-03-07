@@ -1,14 +1,25 @@
 import axios from './axios';
 
+/* export function getBannerList(){
+    return axios.get('/server/product/banner').then(res=>{
+        console.log(res);
+        let {code,codeText,data} = res;
+        if(code == 0){
+            return data;
+        }else{
+            return Promise.reject(codeText);
+        }
+    })
+} */
+
 export function getData(){
     return axios.get('/mi/homepage/main/v1005?platform=m').then(res=>{
-        console.log(res);
+        // console.log(res);
         if(res.code == 0){
             let homepage = res.data.homepage.floors;
             return {
                 bannerData:homepage[1].data.items,
-                kingKong:homepage[2].data.items,
-                plazaData:homepage[5].data.rows[0].items,
+                kingKong:homepage[2].data.items
             };
         }else{
             return Promise.reject(res.message);
@@ -16,9 +27,20 @@ export function getData(){
     })
 }
 
-export function getMapList(){
+/* export function getBtnList(){
     return axios.get('/mi/homepage/main/v1005?platform=m').then(res=>{
         // console.log(res);
+        if(res.code == 0){
+            return res.data.homepage.floors[2].data.items;
+        }else{
+            return Promise.reject(res.message);
+        }
+    })
+} */
+
+export function getMapList(){
+    return axios.get('/mi/homepage/main/v1005?platform=m').then(res=>{
+        console.log(res);
         if(res.code == 0){
             let temp = res.data.homepage.floors;
             return [

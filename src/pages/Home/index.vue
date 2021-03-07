@@ -2,8 +2,14 @@
     <div class="home-box">
         <Header :value="search"></Header>
         <Swiper :bannerData="bannerList"></Swiper>
-        <king-kong :btnList="btnList"></king-kong>
-        <image-map></image-map>
+        <div class="content">
+            <king-kong :btnList="btnList"></king-kong>
+            <image-map></image-map>
+            <div class="plaza-box">
+                <img v-for="(item,index) in plazaList"  :key="index" :src="item.item.pic_url">
+            </div>
+            <product-hot></product-hot>
+        </div>
     </div>
 </template>
 
@@ -12,34 +18,57 @@ import Header from './header'
 import Swiper from './swiper'
 import KingKong from './kingkong'
 import ImageMap from './image-map' 
-import {getBannerList,getBtnList} from '../../api/home';
+import ProductHot from './product-hot'
+import { getData } from '../../api/home';
 export default {
     components:{
         Header,
         Swiper,
         KingKong,
-        ImageMap
+        ImageMap,
+        ProductHot
     },
     data(){
         return {
             search:'',
             bannerList:null,
-            btnList:null
+            btnList:null,
+            plazaList:null
         }
     },
     created(){
-        getBannerList().then(res=>{
-            this.bannerList = res;
-        })
-        getBtnList().then(res=>{
-            this.btnList = res;
+        getData().then(res=>{
+            console.log(res);
+            this.bannerList = res.bannerData;
+            this.btnList = res.kingKong;
+            this.plazaList = res.plazaData;
         })
     }
 }
 </script>
 
-<style lang="less" scoped>
-.home-box{  
-    padding-bottom: 1rem;
+<style lang="less">
+.home-box{
+    padding: 1.1rem 0 1rem;
+    .content{
+        padding: 0 .2rem;
+        .plaza-box{
+        // background: green;
+        height: 2.4rem;
+        display: flex;
+        justify-content: space-around;
+        // align-items: center;
+        img{
+            flex: 1;
+            margin: .1rem .06rem;
+            height: 2.2rem;
+        }
+    }
+    }
 }
+// .home-box::-webkit-scrollbar { width: 0px ;height: 0px; }
+// .home-box::-webkit-scrollbar { width: 0 !important }
+// .home-box::-webkit-scrollbar {
+//     display: none;
+// }
 </style>

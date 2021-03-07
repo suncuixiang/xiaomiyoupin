@@ -20,6 +20,10 @@ export default {
 
 <style lang="less">
 .header-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
     height: 1.1rem;
     background: #845D32;
     display: flex;
@@ -31,7 +35,7 @@ export default {
     }
     .van-search{
         height: 100%;
-        width: 10rem;
+        width: 6.6rem;
         .van-search__content{
             height: .6rem;
             .van-icon{
