@@ -2,7 +2,7 @@
     <div class="home-box">
         <Header :value="search"></Header>
         <Swiper :bannerData="bannerList"></Swiper>
-        <btn-list :btnList="btnList"></btn-list>
+        <king-kong :btnList="btnList"></king-kong>
         <image-map></image-map>
     </div>
 </template>
@@ -10,14 +10,14 @@
 <script>
 import Header from './header'
 import Swiper from './swiper'
-import BtnList from './btn-list'
+import KingKong from './kingkong'
 import ImageMap from './image-map' 
 import {getBannerList,getBtnList} from '../../api/home';
 export default {
     components:{
         Header,
         Swiper,
-        BtnList,
+        KingKong,
         ImageMap
     },
     data(){

@@ -1,5 +1,5 @@
 <template>
-    <div class="btn-box">
+    <div class="king-box">
         <div class="part" v-for="(item,index) in btnList" :key="index">
             <img :src="item.item.pic_url" alt="">
             <span v-text="item.item.title"></span>
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.btn-box{
+.king-box{
     height: 3.4rem;
     // background: green;
     display: flex;

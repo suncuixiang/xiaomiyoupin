@@ -7,7 +7,7 @@
                 replace 
                 :to="item.path"
             >
-                <span :class="currIndex == index ? active:''">{{item.title}}</span>
+                <span>{{item.title}}</span>
                 <template slot="icon" slot-scope="props">
                     <img :src="props.active ? item.active : item.normal">
                 </template>
