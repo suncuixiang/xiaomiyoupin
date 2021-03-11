@@ -5,8 +5,8 @@
             <div></div>
         </div>
         <div class="part-two" ref="two">
-            <div></div>
-            <div></div>
+            <!-- <div></div>
+            <div></div> -->
         </div>
     </div>
 </template>

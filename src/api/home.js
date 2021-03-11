@@ -9,6 +9,11 @@ export function getData(){
                 bannerData:homepage[1].data.items,
                 kingKong:homepage[2].data.items,
                 plazaData:homepage[5].data.rows[0].items,
+                productHot:{
+                    items:homepage[6].data.items,
+                    title:homepage[6].data.title,
+                },
+                slideTitle:homepage[11].data.items
             };
         }else{
             return Promise.reject(res.message);

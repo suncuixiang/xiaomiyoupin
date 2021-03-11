@@ -8,7 +8,8 @@
             <div class="plaza-box">
                 <img v-for="(item,index) in plazaList"  :key="index" :src="item.item.pic_url">
             </div>
-            <product-hot></product-hot>
+            <product-hot :prdData="productHot"></product-hot>
+            <slide-nav :navList="slideNavList"></slide-nav>
         </div>
     </div>
 </template>
@@ -19,6 +20,7 @@ import Swiper from './swiper'
 import KingKong from './kingkong'
 import ImageMap from './image-map' 
 import ProductHot from './product-hot'
+import SlideNav from './slideNav'
 import { getData } from '../../api/home';
 export default {
     components:{
@@ -26,14 +28,17 @@ export default {
         Swiper,
         KingKong,
         ImageMap,
-        ProductHot
+        ProductHot,
+        SlideNav
     },
     data(){
         return {
             search:'',
             bannerList:null,
             btnList:null,
-            plazaList:null
+            plazaList:null,
+            productHot:null,
+            slideNavList:null
         }
     },
     created(){
@@ -42,6 +47,8 @@ export default {
             this.bannerList = res.bannerData;
             this.btnList = res.kingKong;
             this.plazaList = res.plazaData;
+            this.productHot = res.productHot;
+            this.slideNavList = res.slideTitle
         })
     }
 }
