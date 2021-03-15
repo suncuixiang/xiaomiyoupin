@@ -3,7 +3,7 @@ import axios from 'axios';
 // axios.defaults.baseURL = 'http://127.0.0.1:9999';
 
 axios.defaults.withCredentials = true;
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+/* axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.transformRequest = function (data) {
 	if (!data) return data;
 	let result = ``;
@@ -19,6 +19,7 @@ axios.interceptors.response.use(function onFulfilled(response) {
 });
 axios.defaults.validateStatus = function (status) {
 	return /^(2|3)\d{2}$/.test(status);
-}
+} */
+axios.defaults.headers['Content-Type'] = 'application/json';
 
 export default axios;

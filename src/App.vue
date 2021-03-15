@@ -1,19 +1,21 @@
 <template>
   <div id="app">
     <div class="view">
-      <router-view></router-view>
+        <!-- <router-view></router-view> -->
+        <router-view></router-view>
     </div>
-    <Menu></Menu>
+    <router-view name="Footer"></router-view>
+    <!-- <Menu></Menu> -->
   </div>
 </template>
 
 <script>
-import Menu from './components/Menu';
-export default {
-  components:{
-    Menu
-  }
-}
+// import Menu from './components/Menu';
+// export default {
+//   components:{
+//     Menu
+//   }
+// }
 </script>
 
 <style lang="less">

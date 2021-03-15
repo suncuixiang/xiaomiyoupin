@@ -5,9 +5,17 @@ module.exports = {
 		proxy: {
 			'/mi': {
 				target: 'https://m.xiaomiyoupin.com',
+				// ws: true,
 				changeOrigin: true,
 				pathRewrite:{
 					'^/mi':''
+				}
+			},
+			'/micart': {
+				target: 'https://trade.m.xiaomiyoupin.com',
+				changeOrigin: true,
+				pathRewrite:{
+					'^/micart':''
 				}
 			},
 			'/server': {

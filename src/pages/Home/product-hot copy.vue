@@ -4,21 +4,13 @@
             <span class="title" v-text="prdData.title"></span>
             <a href="" class="more">更多></a>
         </div>
-        <van-tabs class="tabs-box">
-            <van-tab class="tab-box" v-for="(item,index) in prdData.items" :key="index">
-                <template #title> 
-                    <img :src="item.item.pic_url" alt="">
-                    <p class="name" v-text="item.item.name"></p>
-                </template>
-            </van-tab>
-        </van-tabs>
         <!-- :width="100" -->
-        <!-- <van-swipe class="swipe" :loop="false" :show-indicators="false">
+        <van-swipe class="swipe" :loop="false" :show-indicators="false">
             <van-swipe-item class="swipe-item" v-for="(item,index) in prdData.items" :key="index">
                 <img :src="item.item.pic_url" alt="">
                 <p class="name" v-text="item.item.name"></p>
             </van-swipe-item>
-        </van-swipe> -->
+        </van-swipe>
     </div>
 </template>
 
@@ -49,42 +41,7 @@ export default {
             color: rgb(153, 153, 153);
         }
     }
-    .tabs-box{
-        margin-top: .1rem;
-        // height: 3rem;
-        // background: pink;
-        .van-tabs__wrap{
-            height: 2.7rem;
-            .van-tab{
-                // background: green;
-                width: 1.9rem;
-                margin-right: .1rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                img{
-                    height: 1.8rem;
-                    width: 1.8rem;
-                }
-                .name{
-                    font-size: .18rem;
-                    padding: -.1rem .1rem;
-                    box-sizing: border-box;
-                    text-align: center;
-                }
-                &:nth-child(1){
-                    background: #EDF6F8;
-                }
-                &:nth-child(2){
-                    background: #FCF7F1;
-                }
-            }
-        }
-        .van-tabs__line{
-            display: none;
-        }
-    }
-    /* .swipe{
+    .swipe{
         // background: pink;
         margin-top: .1rem;
         .van-swipe-item{
@@ -110,6 +67,6 @@ export default {
         .swipe-item:nth-child(2){
             background: #FCF7F1;
         }
-    } */
+    }
 }
 </style>

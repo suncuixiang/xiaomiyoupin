@@ -2,18 +2,44 @@ import axios from './axios';
 
 export function getData(){
     return axios.get('/mi/homepage/main/v1005?platform=m').then(res=>{
-        console.log(res);
+        // console.log(res);
+        res=res.data;
         if(res.code == 0){
-            let homepage = res.data.homepage.floors;
+            let homepage = res.data.homepage.floors,
+            bannerData,
+            kingKong,
+            plazaData,
+            productHot,
+            slideTitle,
+            key;
+            homepage.forEach(item => {
+                key = item.module_key;
+                switch (key) {
+                    case "declare_banner_new":
+                      bannerData = item.data.items;
+                      break;
+                    case "kingkong_new":
+                        kingKong = item.data.items;
+                      break;
+                    case "plaza_new":
+                        plazaData = item.data.rows[0].items;
+                      break;
+                    case "product_hot_new":
+                        productHot={
+                            items:item.data.items,
+                            title:item.data.title,
+                        };
+                      break;
+                    case "slide_flow":
+                        slideTitle = item.data.items;
+                  }
+            });
             return {
-                bannerData:homepage[1].data.items,
-                kingKong:homepage[2].data.items,
-                plazaData:homepage[5].data.rows[0].items,
-                productHot:{
-                    items:homepage[6].data.items,
-                    title:homepage[6].data.title,
-                },
-                slideTitle:homepage[11].data.items
+                bannerData,
+                kingKong,
+                plazaData,
+                productHot,
+                slideTitle
             };
         }else{
             return Promise.reject(res.message);
@@ -24,12 +50,28 @@ export function getData(){
 export function getMapList(){
     return axios.get('/mi/homepage/main/v1005?platform=m').then(res=>{
         // console.log(res);
+        res=res.data;
         if(res.code == 0){
-            let temp = res.data.homepage.floors;
-            return [
-                temp[3].data['_hotspot'],
-                temp[4].data['_hotspot']
-            ];
+            let temp = res.data.homepage.floors,
+            mapList;
+            temp.forEach(item=>{
+                if(item.module_key == 'image_link_map'){
+                    mapList = item[3].data['_hotspot']
+                }
+            })
+            return mapList;
+        }else{
+            return Promise.reject(res.message);
+        }
+    })
+}
+
+export function getProdList(){
+    return axios.get('/mi/homepage/main/v1005?platform=m').then(res=>{
+        // console.log(res);
+        res=res.data;
+        if(res.code == 0){
+            return res.data.feeds.items;
         }else{
             return Promise.reject(res.message);
         }

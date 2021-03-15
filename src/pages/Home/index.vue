@@ -4,7 +4,7 @@
         <Swiper :bannerData="bannerList"></Swiper>
         <div class="content">
             <king-kong :btnList="btnList"></king-kong>
-            <image-map></image-map>
+            <!-- <image-map></image-map> -->
             <div class="plaza-box">
                 <img v-for="(item,index) in plazaList"  :key="index" :src="item.item.pic_url">
             </div>
@@ -18,7 +18,7 @@
 import Header from './header'
 import Swiper from './swiper'
 import KingKong from './kingkong'
-import ImageMap from './image-map' 
+// import ImageMap from './image-map' 
 import ProductHot from './product-hot'
 import SlideNav from './slideNav'
 import { getData } from '../../api/home';
@@ -27,7 +27,7 @@ export default {
         Header,
         Swiper,
         KingKong,
-        ImageMap,
+        // ImageMap,
         ProductHot,
         SlideNav
     },
@@ -43,7 +43,7 @@ export default {
     },
     created(){
         getData().then(res=>{
-            console.log(res);
+            // console.log(res);
             this.bannerList = res.bannerData;
             this.btnList = res.kingKong;
             this.plazaList = res.plazaData;
