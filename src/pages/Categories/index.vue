@@ -58,6 +58,7 @@ export default {
 
 <style lang="less">
 .category-box {
+    margin-bottom: 1.4rem;
     .header-box{
         margin-bottom: 1rem;
         background: #fff;

@@ -7,6 +7,8 @@ import Cart from '../pages/Cart';
 import My from '../pages/My';
 import Login from '../pages/Login'
 import Menu from "../components/Menu"
+import Detail from '../pages/Detail'
+import SignOut from '../pages/SignOut'
 
 Vue.use(VueRouter);
 
@@ -54,9 +56,20 @@ const router = new VueRouter({
             }
         },
         {
+            path:'/detail',
+            name:'detail',
+            // component:My
+            component: Detail
+        },
+        {
             path:'/login',
             name:'login',
             component:Login
+        },
+        {
+            path:'/signout',
+            name:'signout',
+            component:SignOut
         },
         {
             path:'*',

@@ -1,5 +1,7 @@
 <template>
     <div class="swiper">
+        <!-- <van-skeleton v-if="!bannerData" title :row="111" /> -->
+
         <van-swipe class="my-swipe" :loop="true" :autoplay="2000"  indicator-color="white">
             <van-swipe-item v-for="item in bannerData" :key="item.id">
                 <!-- <router-link :to="{path:`/detail/${item.id}`}">
