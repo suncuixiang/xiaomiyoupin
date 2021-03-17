@@ -81,11 +81,11 @@ export default {
       // console.log(skuData);
       this.show=false;
 
-      // let isLogin = this.$store.state.user.token;
-      // if(!isLogin){
-      //   this.$toast('请登录!');
-      //   return;
-      // }
+      let isLogin = this.$store.state.user.token;
+      if(!isLogin){
+        this.$toast('请登录!');
+        return;
+      }
       this.selectedNum=skuData.selectedNum;
 
       this.$store.dispatch('cart/ADD_GOODS',{

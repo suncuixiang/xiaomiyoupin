@@ -3,7 +3,7 @@
         <div class="content">
             <div class="head-box">
                 <van-cell class="head" title="购物车" is-link arrow-direction="left" to="my" />
-                <van-cell ref="fixhead" class="fix-head" title="购物车" is-link arrow-direction="left" to="my" />
+                <!-- <van-cell ref="fixhead" class="fix-head" title="购物车" is-link arrow-direction="left" to="my" /> -->
             </div>
             <div v-if="!isLogin"  class="empty">
                 <img src="https://trade.m.xiaomiyoupin.com/youpin/static/m/res/images/no_result/no_result_cart.png" alt="">
@@ -11,7 +11,7 @@
                 <van-button round to="login">立即登录</van-button>
             </div>
             <div v-if="isLogin" class="login">
-                <div class="empty-box">
+                <div v-if="goods.length==0" class="empty-box">
                     <van-empty
                     class="custom-image"
                     image="https://img01.yzcdn.cn/vant/custom-empty-image.png"
@@ -19,7 +19,7 @@
                     />
                     <van-button class="look" round block to="home" >随便看看</van-button>
                 </div>
-                <div class="full-box">
+                <div v-else class="full-box">
                     <!-- <van-card
                     price="2.00"
                     desc=""
@@ -42,12 +42,12 @@
                     <template #num>
                         <!-- <van-stepper v-model="item.num" /> -->
                         <!-- <van-stepper :value="item.num" @change="onChange" /> -->
-                        <span @click="minus">-</span>
+                        <span @click="minus" :index="index">-</span>
                         <span v-text="item.num"></span>
-                        <span>+</span>
+                        <span @click="plus" :index="index">+</span>
                     </template>
                     </van-card>
-                    <van-submit-bar :price="31050" button-text="提交订单" @submit="onSubmit" />
+                    <van-submit-bar :price="total" button-text="提交订单" @submit="onSubmit" />
                 </div>
             </div>
         </div>
@@ -79,13 +79,21 @@ export default {
         goods(){
             // console.log(this.$store.state.cart.goodsList);
             return this.$store.state.cart.goodsList;
+        },
+        total(){
+            if(this.goods.length!=0){
+                return this.goods.reduce((prev,cur)=>{
+                    return cur.num*cur.price*100+prev;
+                },0)
+            }
+            return 0;
         }
   },
     components:{
         prodList
     },
     methods:{
-        isFixHeadShow(e){
+        /* isFixHeadShow(e){
             let scrolltop = e.target.scrollTop;
             if(scrolltop < 100){
                 this.$refs.fixhead.style.display='none';
@@ -93,7 +101,7 @@ export default {
             if(scrolltop > 100 && scrolltop < 200){
                 this.$refs.fixhead.style.display='flex';
             }
-        },
+        }, */
         onSubmit(){},
         /* onChange(value) {
             console.log(value);
@@ -104,7 +112,25 @@ export default {
             // })
         }, */
         minus(e){
-            console.log(e);
+            // console.log(e.target);
+            // console.log(e.target.attributes.index.value);
+            let index = e.target.attributes.index.value;
+            let item = this.goods[index];
+            if(item.num<=1) return;
+            this.$store.dispatch('cart/CHANGE_GOODS',{
+                title:item.title,
+                num:item.num-1,
+                type:'cart'
+            })
+        },
+        plus(e){
+            let index = e.target.attributes.index.value;
+            let item = this.goods[index];
+            this.$store.dispatch('cart/CHANGE_GOODS',{
+                title:item.title,
+                num:item.num+1,
+                type:'cart'
+            })
         }
     },
     mounted(){
@@ -148,14 +174,14 @@ export default {
                 color: #fff;
             }
         }
-        .van-cell.fix-head{
+        /* .van-cell.fix-head{
             position: fixed;
             top: 0;
             left: 0;
             display: none;
             // display: flex;
             z-index: 100;
-        }
+        } */
         .empty{
             padding: .8rem;
             display: flex;
@@ -209,7 +235,17 @@ export default {
                     font-size: .2rem;
                     }
                     .van-card__num{
-
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        span{
+                            width: .4rem;
+                            height: .4rem;
+                            text-align: center;
+                            font-size: .4rem;
+                            margin-left: .1rem;
+                            background: #F2F3F5;
+                        }
                     }
                 }
 
