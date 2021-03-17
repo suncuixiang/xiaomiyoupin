@@ -24,10 +24,6 @@
       >手机短信登录/注册</van-button
     >
     <div class="forget"><span>立即注册</span> | <span>忘记密码？</span></div>
-    <!-- <div class="other">
-            <van-divider>其他方式登录</van-divider>
-            <div></div>
-        </div> -->
   </div>
 </template>
 
@@ -39,16 +35,14 @@ export default {
       password: "",
     };
   },
-    methods: {
+  methods: {
     onSubmit(values) {
-      // values.pass = passTrans(values.pass);
       this.$store.dispatch("user/USER_LOGIN", values).then(() => {
         let isLogin = this.$store.state.user.token;
         console.log(this.$store.state.user);
         if (isLogin) {
           this.$notify({ type: "success", message: "登录成功" });
           setTimeout(() => {
-            // this.$router.push({ name: "my" });
             this.$router.go(-1);
           }, 500);
         } else {
@@ -60,7 +54,6 @@ export default {
       });
     },
   },
-
 };
 </script>
 
@@ -83,8 +76,6 @@ export default {
     }
     .van-cell::after {
       border-bottom: 0.01rem solid #777;
-    }
-    .van-field__control {
     }
     .van-icon-eye {
       color: #4d4d4d;
@@ -115,13 +106,5 @@ export default {
     font-size: 0.38rem;
     margin: 0.8rem 0;
   }
-  /* .van-divider{
-        color: #333;
-    }
-    .other{
-        div{
-            background: url('https://account.xiaomi.com/static/res/166d6dc/account-static/respassport/acc-2014/img/icons_type.png');
-        }
-    } */
 }
 </style>

@@ -1,115 +1,81 @@
 <template>
-    <div class="product-hot-box" v-if="prdData">
-        <div class="head">
-            <span class="title" v-text="prdData.title"></span>
-            <a href="" class="more">更多></a>
-        </div>
-        <van-tabs class="tabs-box">
-            <van-tab class="tab-box" v-for="(item,index) in prdData.items" :key="index">
-                <template #title> 
-                    <img :src="item.item.pic_url" alt="">
-                    <p class="name" v-text="item.item.name"></p>
-                </template>
-            </van-tab>
-        </van-tabs>
-        <!-- :width="100" -->
-        <!-- <van-swipe class="swipe" :loop="false" :show-indicators="false">
-            <van-swipe-item class="swipe-item" v-for="(item,index) in prdData.items" :key="index">
-                <img :src="item.item.pic_url" alt="">
-                <p class="name" v-text="item.item.name"></p>
-            </van-swipe-item>
-        </van-swipe> -->
+  <div class="product-hot-box" v-if="prdData">
+    <div class="head">
+      <span class="title" v-text="prdData.title"></span>
+      <a href="" class="more">更多></a>
     </div>
+    <van-tabs class="tabs-box">
+      <van-tab
+        class="tab-box"
+        v-for="(item, index) in prdData.items"
+        :key="index"
+      >
+        <template #title>
+          <img :src="item.item.pic_url" alt="" />
+          <p class="name" v-text="item.item.name"></p>
+        </template>
+      </van-tab>
+    </van-tabs>
+  </div>
 </template>
 
 <script>
 export default {
-    props:['prdData']
-}
+  props: ["prdData"],
+};
 </script>
 
 <style lang="less">
-.product-hot-box{
-    background: #fff;
-    // height: 6rem;
-    padding: .14rem;
+.product-hot-box {
+  background: #fff;
+  padding: 0.14rem;
+  display: flex;
+  flex-direction: column;
+  .head {
     display: flex;
-    flex-direction: column;
-    .head{
+    justify-content: space-between;
+    align-items: center;
+    height: 0.6rem;
+    .title {
+      font-size: 0.38rem;
+      color: rgb(51, 51, 51);
+    }
+    .more {
+      font-size: 0.2rem;
+      color: rgb(153, 153, 153);
+    }
+  }
+  .tabs-box {
+    margin-top: 0.1rem;
+    .van-tabs__wrap {
+      height: 2.7rem;
+      .van-tab {
+        width: 1.9rem;
+        margin-right: 0.1rem;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
-        height: .6rem;
-        .title{
-            font-size: .38rem;
-            color: rgb(51, 51, 51);
+        img {
+          height: 1.8rem;
+          width: 1.8rem;
         }
-        .more{
-            font-size: .2rem;
-            color: rgb(153, 153, 153);
+        .name {
+          font-size: 0.18rem;
+          padding: -0.1rem 0.1rem;
+          box-sizing: border-box;
+          text-align: center;
         }
+        &:nth-child(1) {
+          background: #edf6f8;
+        }
+        &:nth-child(2) {
+          background: #fcf7f1;
+        }
+      }
     }
-    .tabs-box{
-        margin-top: .1rem;
-        // height: 3rem;
-        // background: pink;
-        .van-tabs__wrap{
-            height: 2.7rem;
-            .van-tab{
-                // background: green;
-                width: 1.9rem;
-                margin-right: .1rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                img{
-                    height: 1.8rem;
-                    width: 1.8rem;
-                }
-                .name{
-                    font-size: .18rem;
-                    padding: -.1rem .1rem;
-                    box-sizing: border-box;
-                    text-align: center;
-                }
-                &:nth-child(1){
-                    background: #EDF6F8;
-                }
-                &:nth-child(2){
-                    background: #FCF7F1;
-                }
-            }
-        }
-        .van-tabs__line{
-            display: none;
-        }
+    .van-tabs__line {
+      display: none;
     }
-    /* .swipe{
-        // background: pink;
-        margin-top: .1rem;
-        .van-swipe-item{
-            width: 1.9rem !important;
-            margin-right: .1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            img{
-                height: 1.8rem;
-                width: 1.8rem;
-            }
-            .name{
-                font-size: .2rem;
-                padding: 0 .14rem;
-                box-sizing: border-box;
-                text-align: center;
-            }
-        }
-        .swipe-item:nth-child(1){
-            background: #EDF6F8;
-        }
-        .swipe-item:nth-child(2){
-            background: #FCF7F1;
-        }
-    } */
+  }
 }
 </style>

@@ -33,8 +33,16 @@
     <div class="goods-bar">
       <van-goods-action>
         <van-goods-action-icon icon="shop-o" text="店铺" dot />
-        <van-goods-action-icon icon="cart-o" text="购物车" :badge="selectedNum" />
-        <van-goods-action-button @click="show=true" type="warning" text="加入购物车" />
+        <van-goods-action-icon
+          icon="cart-o"
+          text="购物车"
+          :badge="selectedNum"
+        />
+        <van-goods-action-button
+          @click="show = true"
+          type="warning"
+          text="加入购物车"
+        />
         <van-goods-action-button type="danger" text="立即购买" />
       </van-goods-action>
     </div>
@@ -62,14 +70,14 @@ export default {
       staticWords: "",
       linkWords: "",
       show: false,
-      selectedNum:'',
+      selectedNum: "",
       sku: {
         tree: [],
         list: [],
         price: "1.00",
         stock_num: 227,
-        collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
-        none_sku: true, // 是否无规格商品
+        collection_id: 2261,
+        none_sku: true,
       },
       goods: {
         picture: "",
@@ -77,33 +85,29 @@ export default {
     };
   },
   methods: {
-    onAddCartClicked(skuData){
-      // console.log(skuData);
-      this.show=false;
-
+    onAddCartClicked(skuData) {
+      this.show = false;
       let isLogin = this.$store.state.user.token;
-      if(!isLogin){
-        this.$toast('请登录!');
+      if (!isLogin) {
+        this.$toast("请登录!");
         return;
       }
-      this.selectedNum=skuData.selectedNum;
+      this.selectedNum = skuData.selectedNum;
 
-      this.$store.dispatch('cart/ADD_GOODS',{
-        title:this.title,
-        price:this.sku.price,
-        num:this.selectedNum,
-        pic:this.goods.picture,
-        type:'detail'
-      })
+      this.$store.dispatch("cart/ADD_GOODS", {
+        title: this.title,
+        price: this.sku.price,
+        num: this.selectedNum,
+        pic: this.goods.picture,
+        type: "detail",
+      });
     },
-    onBuyClicked(){
-      this.show=false;
-    }
+    onBuyClicked() {
+      this.show = false;
+    },
   },
   created() {
     getPrdDetail(this.$route.query.gid).then((res) => {
-        // console.log(res);
-      //   console.log(res.operation.wzl);
       let goodsInfo = res.goods,
         wzl = res.operation.wzl;
       this.bannerList = goodsInfo.carouselMapList;
@@ -112,9 +116,8 @@ export default {
       this.title = goodsInfo.shareInfo.poster.title;
       this.staticWords = wzl && wzl.staticWords;
       this.linkWords = wzl && wzl.hyperlinkWords;
-      this.goods.picture=goodsInfo.goodsInfo.picUrl;
-      // this.sku.price = goodsInfo.goodsInfo.priceMin;
-      this.sku.price = goodsInfo.goodsInfo.priceMin/100;
+      this.goods.picture = goodsInfo.goodsInfo.picUrl;
+      this.sku.price = goodsInfo.goodsInfo.priceMin / 100;
     });
   },
 };

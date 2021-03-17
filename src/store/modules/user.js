@@ -9,7 +9,7 @@ const state = {
 };
 
 const mutations = {
-  [TYPES.USER_LOGIN]: (state,payload) => {
+  [TYPES.USER_LOGIN]: (state, payload) => {
     let { token, name, avatar } = payload;
     state.token = token;
     state.name = name;
@@ -23,22 +23,21 @@ const mutations = {
 };
 
 const actions = {
-    [TYPES.USER_LOGIN]:({ commit }, payload)=> {
+  [TYPES.USER_LOGIN]: ({ commit }, payload) => {
     return login(payload).then((res) => {
-        // console.log(111,res);
-        let {token,name,avatar} = res;
-        commit(TYPES.USER_LOGIN, res);
-        Cookies.set("token", token);
-        sessionStorage.setItem("name", name);
-        sessionStorage.setItem("avatar", avatar);
+      let { token, name, avatar } = res;
+      commit(TYPES.USER_LOGIN, res);
+      Cookies.set("token", token);
+      sessionStorage.setItem("name", name);
+      sessionStorage.setItem("avatar", avatar);
     });
   },
-  [TYPES.USER_SIGNOUT]:({ commit })=> {
+  [TYPES.USER_SIGNOUT]: ({ commit }) => {
     return signOut().then(() => {
       commit(TYPES.USER_SIGNOUT);
-    Cookies.remove("token");
-    sessionStorage.removeItem("name");
-    sessionStorage.removeItem("avatar");
+      Cookies.remove("token");
+      sessionStorage.removeItem("name");
+      sessionStorage.removeItem("avatar");
     });
   },
 };

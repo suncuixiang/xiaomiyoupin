@@ -1,7 +1,9 @@
 <template>
   <div class="prod-list" v-if="data">
     <div class="inner" v-for="(item, i) in data" :key="i">
-      <router-link :to="{ name: 'detail', query: { gid: data[i].data.goods.gid}}">
+      <router-link
+        :to="{ name: 'detail', query: { gid: data[i].data.goods.gid } }"
+      >
         <img :src="item.data.goods && item.data.goods.picUrl" alt="" />
         <div class="title">{{ item.data.goods && item.data.goods.name }}</div>
         <div class="des">{{ item.data.goods && item.data.goods.summary }}</div>
@@ -26,7 +28,6 @@ export default {
 
 <style lang="less">
 .prod-list {
-  // background: #f4f4f4;
   padding-top: 0.2rem;
   .inner {
     background: #fff;
@@ -61,7 +62,6 @@ export default {
       .now {
         font-size: 0.36rem;
         color: rgba(227, 13, 13);
-        // margin-left: .2rem;
         margin-bottom: 0.1rem;
       }
       .old {
